@@ -21,7 +21,7 @@
                             <small class="flex-fill text-center border-end py-2"><i class="fa fa-calendar-alt me-2"></i>{{ $traveler->travel_duration }}</small>
                             <small class="flex-fill text-center py-2"><i class="fa fa-user me-2"></i>2 Person</small>
                         </div>
-                        <div class="packages-price py-2 px-4">$549.00</div>
+                        <div class="packages-price py-2 px-4">${{ $traveler->price ?? 'N/A' }}</div>
                     </div>
                     <div class="packages-content bg-light">
                         <div class="p-4 pb-0">

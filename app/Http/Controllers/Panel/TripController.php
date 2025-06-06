@@ -87,6 +87,7 @@ class TripController extends Controller
         Trip::create([
             'title' => $request->title,
             'slug' => Str::slug($request->title),
+            'traveler_id' => Auth::user()->id,
             'description' => $request->description,
             'destination_id' => $request->destination_id,
             'image' => $tripImage,
@@ -118,6 +119,7 @@ class TripController extends Controller
 
         $trip->update([
             'title' => $request->title,
+            'traveler_id' => Auth::user()->id,
             'slug' => Str::slug($request->title),
             'description' => $request->description,
             'destination_id' => $request->destination_id,

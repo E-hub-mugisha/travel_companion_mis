@@ -2,33 +2,32 @@
 @section('content')
 <div class="auth-content">
     <div class="card">
-        <div class="card-body text-center">
+        <div class="card-body">
             <div class="mb-4">
-                <!-- <img class="brand" src="assets/img/bootstraper-logo.png" alt="bootstraper logo"> -->
                 <h1 class="m-0"><i class="fa fa-map-marker-alt me-3"></i>Inkindi Tours</h1>
             </div>
             <form method="POST" action="{{ route('register') }}">
                 @csrf
 
                 <!-- Name -->
-                <div>
-                    <label for="name" :value="__('Name')">
-                    <input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input id="name" class="form-control" type="text" name="name" :value="old('name')" required autofocus autocomplete="name">
                     <error :messages="$errors->get('name')" class="mt-2">
                 </div>
 
                 <!-- Email Address -->
-                <div class="mt-4">
-                    <label for="email" :value="__('Email')">
-                    <input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username">
+                <div class="form-group mt-4">
+                    <label for="email">Email</label>
+                    <input id="email" class="form-control" type="email" name="email" :value="old('email')" required autocomplete="username">
                     <error :messages="$errors->get('email')" class="mt-2">
                 </div>
 
                 <!-- Password -->
-                <div class="mt-4">
-                    <label for="password" :value="__('Password')">
+                <div class="form-group mt-4">
+                    <label for="password">Password</label>
 
-                    <input id="password" class="block mt-1 w-full"
+                    <input id="password" class="form-control"
                         type="password"
                         name="password"
                         required autocomplete="new-password">
@@ -37,10 +36,10 @@
                 </div>
 
                 <!-- Confirm Password -->
-                <div class="mt-4">
-                    <label for="password_confirmation" :value="__('Confirm Password')">
+                <div class="form-group mt-4">
+                    <label for="password_confirmation">Confirm Password</label>
 
-                    <input id="password_confirmation" class="block mt-1 w-full"
+                    <input id="password_confirmation" class="form-control"
                         type="password"
                         name="password_confirmation" required autocomplete="new-password">
 
@@ -52,9 +51,9 @@
                         {{ __('Already registered?') }}
                     </a>
 
-                    <x-primary-button class="ms-4">
+                    <button class="btn btn-success ms-4">
                         {{ __('Register') }}
-                    </x-primary-button>
+                    </button>
                 </div>
             </form>
             @if (Route::has('password.request'))

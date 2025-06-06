@@ -29,7 +29,7 @@
                         </label>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary mb-4" style="width:100%">Login</button>
+                <button type="submit" class="btn btn-success mb-4" style="width:100%">Login</button>
             </form>
             @if (Route::has('password.request'))
             <p class="mb-2 text-muted">Forgot password? <a href="{{ route('password.request') }}">Reset</a></p>

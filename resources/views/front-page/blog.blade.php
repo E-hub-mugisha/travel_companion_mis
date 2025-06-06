@@ -9,7 +9,8 @@
         <div class="mx-auto text-center mb-5" style="max-width: 900px;">
             <h5 class="section-title px-3">Explore Tour</h5>
             <h1 class="mb-4">The World</h1>
-            
+            <p class="mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum tempore nam, architecto doloremque velit explicabo? Voluptate sunt eveniet fuga eligendi! Expedita laudantium fugiat corrupti eum cum repellat a laborum quasi.
+            </p>
         </div>
 
         <div class="row g-4">
@@ -39,7 +40,7 @@
                     </div>
                     <div class="row bg-primary rounded-bottom mx-0">
                         <div class="col-6 text-start px-0">
-                            <a href="{{ route('inkindi.trips.details', $trip->slug )}}" class="btn-hover btn text-white py-2 px-4">Read More</a>
+                            <a href="#" class="btn-hover btn text-white py-2 px-4">Read More</a>
                         </div>
                         <div class="col-6 text-end px-0">
                             <a href="#" class="btn-hover btn text-white py-2 px-4">Book Now</a>

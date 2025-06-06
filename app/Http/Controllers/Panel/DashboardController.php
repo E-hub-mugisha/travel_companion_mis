@@ -56,7 +56,7 @@ class DashboardController extends Controller
                 ->take(3);
 
             $buddies = BuddyRequest::where(function ($query) use ($travelerProfile) {
-                $query->where('receiver_id', $travelerProfile->id)
+                $query->where('traveler_profile_id', $travelerProfile->id)
                     ->orWhere('requester_id', Auth::id());
             })->get();
         }

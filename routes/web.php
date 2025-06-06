@@ -17,6 +17,7 @@ Route::get('/blog', [HomeController::class, 'blog'])->name('blog');
 Route::get('/blog/{slug}', [HomeController::class, 'blogPost'])->name('blog.post');
 Route::get('/destinations', [HomeController::class, 'destinations'])->name('destinations');
 Route::get('/inkindi/trips', [HomeController::class, 'trips'])->name('inkindi.trips');
+Route::get('/inkindi/trip/{slug}', [HomeController::class, 'tripDetails'])->name('inkindi.trips.details');
 Route::get('/travel-buddies', [TravelBuddyController::class, 'index'])->name('travel-buddies.index');
 Route::get('/traveler-profile/{id}', [HomeController::class, 'travelerProfile'])->name('traveler-profile');
 

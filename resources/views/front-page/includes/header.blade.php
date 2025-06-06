@@ -23,7 +23,7 @@
 
                 @auth
                 <div class="dropdown">
-                    <a href="#" class="dropdown-toggle text-light" data-bs-toggle="dropdown">
+                    <a href="{{ route('dashboard') }}" class="dropdown-toggle text-light" data-bs-toggle="dropdown">
                         <small><i class="fa fa-home me-2"></i> My Dashboard</small>
                     </a>
                     <div class="dropdown-menu rounded">

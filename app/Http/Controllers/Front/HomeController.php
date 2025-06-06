@@ -35,6 +35,11 @@ class HomeController extends Controller
         $trips = Trip::with('destination')->inRandomOrder()->take(6)->get();
         return view('front-page.trips', compact('trips'));
     }
+    public function tripDetails($slug)
+    {
+        $trip = Trip::where('slug', $slug)->with(['destination', 'traveler'])->firstOrFail();
+        return view('front-page.trip-details', compact('trip'));
+    }
     public function travelerProfile($id)
     {
         $traveler = TravelerProfile::findOrFail($id);
@@ -48,5 +53,10 @@ class HomeController extends Controller
             return Carbon::parse($trip->end_date)->lt($today);
         });
         return view('front-page.traveler-profile', compact('traveler', 'upcomingTrips', 'completedTrips'));
+    }
+    public function blog()
+    {
+        $trips = Trip::with('destination')->inRandomOrder()->take(6)->get();
+        return view('front-page.blog', compact('trips'));
     }
 }
