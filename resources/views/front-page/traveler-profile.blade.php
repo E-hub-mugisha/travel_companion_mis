@@ -230,9 +230,8 @@
           <div class="mb-3">
             <label for="message" class="form-label">Message for Buddy</label>
             <textarea id="message" name="message" class="form-control" rows="3" required>
-Hi, I found your trip to {{ $trip->destination->name }} interesting. Would you like to be travel buddies?
-</textarea>
-
+              Hi, I found your trip to {{ $trip->destination->name }} interesting. Would you like to be travel buddies?
+            </textarea>
           </div>
         </div>
 

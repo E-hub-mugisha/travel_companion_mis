@@ -59,24 +59,29 @@
     @endif
 
     <div class="mt-4">
-        <h4>Your Travel Buddies</h4>
-        <ul class="list-group mb-3">
-            @forelse ($buddies as $buddy)
+    <h4>Your Travel Buddies</h4>
+    <ul class="list-group mb-3">
+        @forelse ($buddies as $buddy)
             @php
-            $buddyId = $buddy->receiver_id === $travelerProfile->id ? $buddy->requester_id : $buddy->receiver_id;
-            $profile = \App\Models\TravelerProfile::find($buddyId);
+                // Identify the other user's ID in the buddy request
+                $buddyUserId = $buddy->receiver_id === auth()->id() ? $buddy->requester_id : $buddy->receiver_id;
+
+                // Get their traveler profile
+                $profile = \App\Models\TravelerProfile::where('user_id', $buddyUserId)->first();
             @endphp
+
             @if($profile)
             <li class="list-group-item d-flex justify-content-between align-items-center">
                 {{ $profile->user->name }}
-                <a href="" class="btn btn-outline-primary btn-sm">View</a>
+                <a href="{{ route('traveler-profiles.show', $profile->id) }}" class="btn btn-outline-primary btn-sm">View</a>
             </li>
             @endif
-            @empty
+        @empty
             <li class="list-group-item">No buddies yet.</li>
-            @endforelse
-        </ul>
-    </div>
+        @endforelse
+    </ul>
+</div>
+
 
     <div class="mt-4">
         <h4>Upcoming Trips</h4>

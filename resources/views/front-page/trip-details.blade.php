@@ -1,7 +1,8 @@
 @extends('layouts.guest')
 
 @section('title', 'Trip Details')
-@section('meta-description', 'Explore the details of this amazing trip. Discover the itinerary, highlights, and more about this travel experience.')
+<blade
+    section|(%26%2339%3Bmeta-description%26%2339%3B%2C%20%26%2339%3BExplore%20the%20details%20of%20this%20amazing%20trip.%20Discover%20the%20itinerary%2C%20highlights%2C%20and%20more%20about%20this%20travel%20experience.%26%2339%3B) />
 
 @section('content')
 
@@ -22,9 +23,8 @@
                     @if($trip->image)
                         <div class="position-relative overflow-hidden">
                             <img src="{{ asset('image/trips/' . $trip->image) }}"
-                                 alt="{{ $trip->title }} Image"
-                                 class="img-fluid w-100"
-                                 style="max-height: 480px; object-fit: cover;">
+                                alt="{{ $trip->title }} Image" class="img-fluid w-100"
+                                style="max-height: 480px; object-fit: cover;">
                         </div>
                     @endif
 
@@ -65,16 +65,56 @@
 
                         {{-- Optional Booking Button --}}
                         <div class="mt-4 text-center">
-                            <a href="#" class="btn btn-primary px-5 py-2 rounded-pill shadow-sm">
-                                Book This Trip
-                            </a>
+
+                            <button type="button" class="btn btn-primary  px-5 py-2 rounded-pill shadow-sm"
+                                data-bs-toggle="modal" data-bs-target="#requestBuddyModal{{ $trip->id }}">
+                                Request a Travel Buddy to this Trip <i class="fas fa-user-friends"></i>
+                            </button>
+                        </div>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="requestBuddyModal{{ $trip->id }}" tabindex="-1"
+                            aria-labelledby="requestBuddyModalLabel{{ $trip->id }}" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <form action="{{ route('request.buddy', $trip->id) }}"
+                                    method="POST" class="modal-content">
+                                    @csrf
+                                    <input type="hidden" name="trip_id" value="{{ $trip->id }}">
+                                    <input type="hidden" name="receiver_id" value="{{ $trip->traveler->id }}">
+
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="requestBuddyModalLabel{{ $trip->id }}">Request
+                                            Travel Buddy</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+
+                                    <div class="modal-body">
+                                        <div class="mb-3">
+                                            <label for="message" class="form-label">Message for Buddy</label>
+                                            <textarea id="message" name="message" class="form-control" rows="3"
+                                                required>
+              Hi, I found your trip to {{ $trip->destination->name }} interesting. Would you like to be travel buddies?
+            </textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary" data-bs-toggle="tooltip"
+                                            title="Send a request to this buddy">
+                                            Send Request <i class="fas fa-paper-plane"></i>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 {{-- Optional Back Button --}}
                 <div class="text-center">
-                    <a href="{{ route('trips.index') }}" class="btn btn-outline-secondary rounded-pill px-4">
+                    <a href="{{ route('trips.index') }}"
+                        class="btn btn-outline-secondary rounded-pill px-4">
                         &larr; Back to All Trips
                     </a>
                 </div>
