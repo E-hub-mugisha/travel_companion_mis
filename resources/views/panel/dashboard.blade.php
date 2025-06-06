@@ -73,7 +73,7 @@
             @if($profile)
             <li class="list-group-item d-flex justify-content-between align-items-center">
                 {{ $profile->user->name }}
-                <a href="{{ route('traveler-profiles.show', $profile->id) }}" class="btn btn-outline-primary btn-sm">View</a>
+                <a href="#" class="btn btn-outline-primary btn-sm">View</a>
             </li>
             @endif
         @empty
