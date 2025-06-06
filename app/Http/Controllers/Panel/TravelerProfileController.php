@@ -14,11 +14,21 @@ class TravelerProfileController extends Controller
 {
     public function index()
     {
-        $profiles = TravelerProfile::with('destination')->latest()->get();
+        $user = Auth::user();
+
+        // Check if the user is an admin
+        if ($user->role === 'admin') {
+            $profiles = TravelerProfile::with('destination')->latest()->get();
+        } else {
+            $profiles = TravelerProfile::with('destination')
+                ->where('user_id', $user->id)
+                ->latest()
+                ->get();
+        }
+
         $destinations = Destination::all();
         return view('panel.profile.index', compact('profiles', 'destinations'));
     }
-
     public function store(Request $request)
     {
         $data = $request->validate([
@@ -39,6 +49,7 @@ class TravelerProfileController extends Controller
         ]);
 
         TravelerProfile::create($data);
+
         return redirect()->back()->with('success', 'Traveler Profile added successfully!');
     }
 
@@ -65,7 +76,7 @@ class TravelerProfileController extends Controller
             if ($travelerProfile) {
                 $buddies = BuddyRequest::where(function ($query) use ($travelerProfile) {
                     $query->where('receiver_id', $travelerProfile->id)
-                        ->orWhere('requester_id', Auth::user()->id );
+                        ->orWhere('requester_id', Auth::user()->id);
                 })->with(['requester', 'receiver', 'trip'])->latest()->get();
             }
         }

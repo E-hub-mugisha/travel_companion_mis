@@ -67,7 +67,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto py-0">
-                <a href="{{ route('home') }}" class="nav-item nav-link active">Home</a>
+                <a href="{{ route('home') }}" class="nav-item nav-link">Home</a>
                 <a href="{{ route('about') }}" class="nav-item nav-link">About</a>
                 <a href="{{ route('travel-buddies.index') }}" class="nav-item nav-link">Buddies</a>
                 <a href="{{ route('inkindi.trips') }}" class="nav-item nav-link">Trips</a>

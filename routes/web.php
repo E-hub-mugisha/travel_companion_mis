@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\Front\HomeController;
 use App\Http\Controllers\Front\TravelBuddyController;
 use App\Http\Controllers\Panel\DashboardController;
@@ -54,7 +55,7 @@ Route::middleware('auth')->group(function () {
     Route::get('traveler/requests', [TravelerProfileController::class, 'buddyRequests'])->name('buddies.index.requests');
     Route::put('travel/buddies/status/{id}', [TravelerProfileController::class, 'buddyRequestUpdate'])->name('travel_buddies.update');
 
-
+    Route::resource('blogs', BlogController::class);
     Route::get('feedbacks', [\App\Http\Controllers\Panel\FeedbacksController::class, 'index'])->name('panel.feedbacks.index');
     Route::get('feedbacks/{id}', [\App\Http\Controllers\Panel\FeedbacksController::class, 'show'])->name('panel.feedbacks.show');
     Route::get('feedbacks/create', [\App\Http\Controllers\Panel\FeedbacksController::class, 'create'])->name('panel.feedbacks.create');
@@ -66,4 +67,4 @@ Route::middleware('auth')->group(function () {
     Route::get('feedbacks/{id}/reject', [\App\Http\Controllers\Panel\FeedbacksController::class, 'reject'])->name('panel.feedbacks.reject');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

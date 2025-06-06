@@ -1,59 +1,86 @@
 @extends('layouts.guest')
 
+@section('title', 'Trip Details')
+@section('meta-description', 'Explore the details of this amazing trip. Discover the itinerary, highlights, and more about this travel experience.')
+
 @section('content')
 
 @include('front-page.includes.breadcrumb')
 
-<section class="bg-gray-50 py-10">
-    <div class="max-w-5xl mx-auto px-6">
-        <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
-            {{-- Trip Image --}}
-            @if($trip->image)
-                <img src="{{ asset('image/trips/' . $trip->image) }}" 
-                     alt="Trip Image" 
-                     class="w-full h-80 object-cover md:h-[450px]">
-            @endif
+<div class="container-fluid packages py-5 bg-light">
+    <div class="container py-5">
+        <div class="text-center mb-5" style="max-width: 900px; margin: auto;">
+            <h5 class="section-title px-3 text-primary text-uppercase">@yield('title')</h5>
+            <h1 class="display-5 fw-bold text-dark">{{ $trip->title }}</h1>
+        </div>
 
-            <div class="p-8">
-                {{-- Title and Destination --}}
-                <div class="mb-6">
-                    <h1 class="text-4xl font-bold text-gray-800 mb-2">{{ $trip->title }}</h1>
-                    <div class="flex items-center gap-2 text-gray-500 text-sm">
-                        <svg class="w-5 h-5 text-indigo-500" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 2C8.13 2 5 5.13 5 9c0 4.25 7 13 7 13s7-8.75 7-13c0-3.87-3.13-7-7-7z" />
-                        </svg>
-                        <span>{{ $trip->destination->name }}</span>
-                    </div>
-                    @if($trip->start_date && $trip->end_date)
-                        <p class="text-gray-400 text-sm mt-1">
-                            {{ \Carbon\Carbon::parse($trip->start_date)->format('F j, Y') }}
-                            &mdash;
-                            {{ \Carbon\Carbon::parse($trip->end_date)->format('F j, Y') }}
-                        </p>
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="bg-white rounded-4 shadow-lg overflow-hidden mb-5">
+
+                    {{-- Trip Image --}}
+                    @if($trip->image)
+                        <div class="position-relative overflow-hidden">
+                            <img src="{{ asset('image/trips/' . $trip->image) }}"
+                                 alt="{{ $trip->title }} Image"
+                                 class="img-fluid w-100"
+                                 style="max-height: 480px; object-fit: cover;">
+                        </div>
                     @endif
+
+                    <div class="p-4 p-md-5">
+                        {{-- Destination and Dates --}}
+                        <div class="mb-4">
+                            <div class="d-flex align-items-center mb-2 text-muted">
+                                <i class="bi bi-geo-alt-fill me-2 text-primary"></i>
+                                <span class="fw-semibold">{{ $trip->destination->name }}</span>
+                            </div>
+                            @if($trip->start_date && $trip->end_date)
+                                <p class="text-secondary small mb-0">
+                                    {{ \Carbon\Carbon::parse($trip->start_date)->format('F j, Y') }}
+                                    &mdash;
+                                    {{ \Carbon\Carbon::parse($trip->end_date)->format('F j, Y') }}
+                                </p>
+                            @endif
+                        </div>
+
+                        {{-- Description --}}
+                        <div class="mb-5">
+                            <h3 class="h5 fw-bold mb-3 text-dark">About this Trip</h3>
+                            <p class="text-muted fs-6 lh-lg">
+                                {{ $trip->description ?? 'No description provided.' }}
+                            </p>
+                        </div>
+
+                        {{-- Posted Info --}}
+                        <div class="d-flex justify-content-between border-top pt-3 text-muted small">
+                            <div>
+                                <span>Posted by </span>
+                                <span class="fw-semibold text-dark">{{ $trip->traveler->name }}</span>
+                            </div>
+                            <div>
+                                {{ $trip->created_at->format('F j, Y') }}
+                            </div>
+                        </div>
+
+                        {{-- Optional Booking Button --}}
+                        <div class="mt-4 text-center">
+                            <a href="#" class="btn btn-primary px-5 py-2 rounded-pill shadow-sm">
+                                Book This Trip
+                            </a>
+                        </div>
+                    </div>
                 </div>
 
-                {{-- Description --}}
-                <div class="mb-6">
-                    <h2 class="text-2xl font-semibold text-gray-700 mb-3">About this Trip</h2>
-                    <p class="text-gray-600 leading-relaxed">
-                        {{ $trip->description ?? 'No description provided.' }}
-                    </p>
-                </div>
-
-                {{-- Author and Date --}}
-                <div class="mt-10 border-t pt-4 flex justify-between items-center text-sm text-gray-500">
-                    <div>
-                        Posted by 
-                        <span class="font-medium text-gray-700">{{ $trip->traveler->name }}</span>
-                    </div>
-                    <div>
-                        {{ $trip->created_at->format('F j, Y') }}
-                    </div>
+                {{-- Optional Back Button --}}
+                <div class="text-center">
+                    <a href="{{ route('trips.index') }}" class="btn btn-outline-secondary rounded-pill px-4">
+                        &larr; Back to All Trips
+                    </a>
                 </div>
             </div>
         </div>
     </div>
-</section>
+</div>
 
 @endsection

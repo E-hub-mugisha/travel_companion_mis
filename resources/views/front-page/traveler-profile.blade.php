@@ -132,7 +132,8 @@
               @endforelse
 
               <!-- Feedback Form -->
-              @if(auth()->check() && auth()->id() !== $traveler->id)
+              @if(auth()->check() && auth()->user()->id !== $traveler->user_id)
+              <h5 class="mt-4">Leave Feedback</h5>
               <form action="{{ route('buddy.feedback.store', $traveler->id) }}" method="POST" class="mb-4">
                 @csrf
                 <div class="mb-3">

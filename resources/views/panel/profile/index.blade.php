@@ -7,8 +7,11 @@
     <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
+    @if(auth()->user()->role == 'admin')
     <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addModal">Add Traveler Profile</button>
 
+    @endif
+    
     <table class="table table-bordered table-striped" width="100%">
         <thead>
             <tr>
@@ -35,10 +38,17 @@
                 <td>
                     <button class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#showModal{{ $profile->id }}">Show</button>
                     <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editModal{{ $profile->id }}">Edit</button>
+
+                    <!-- role check -->
+                    @if(auth()->user()->role == 'admin')
+                    <button class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#profilePhotoModal{{ $profile->id }}">Add Photo</button>
+                    
                     <form method="POST" action="{{ route('traveler-profiles.destroy', $profile->id) }}" style="display:inline-block;">
                         @csrf @method('DELETE')
                         <button onclick="return confirm('Are you sure?')" class="btn btn-danger btn-sm">Delete</button>
                     </form>
+                    @endif
+                    
                 </td>
             </tr>
 

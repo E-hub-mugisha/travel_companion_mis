@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
+use App\Models\Blog;
 use App\Models\TravelerProfile;
 use App\Models\Trip;
 use Carbon\Carbon;
@@ -14,7 +15,8 @@ class HomeController extends Controller
     {
         $travelers = TravelerProfile::inRandomOrder()->take(6)->get();
         $tours = Trip::with('destination')->inRandomOrder()->take(6)->get();
-        return view('front-page.home', compact('travelers', 'tours'));
+        $blogs = Blog::inRandomOrder()->take(6)->get();
+        return view('front-page.home', compact('travelers', 'tours', 'blogs'));
     }
 
     public function about()
@@ -56,7 +58,12 @@ class HomeController extends Controller
     }
     public function blog()
     {
-        $trips = Trip::with('destination')->inRandomOrder()->take(6)->get();
-        return view('front-page.blog', compact('trips'));
+        $blogs = Blog::inRandomOrder()->take(6)->get();
+        return view('front-page.blog', compact('blogs'));
+    }
+    public function blogPost($slug)
+    {
+        $blog = Blog::where('slug', $slug)->firstOrFail();
+        return view('front-page.blog-detail', compact('blog'));
     }
 }
