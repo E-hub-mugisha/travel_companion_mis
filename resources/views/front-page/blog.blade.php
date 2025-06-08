@@ -37,7 +37,9 @@
             </div>
             @endforeach
         </div>
-
+<div class="justify-center">
+    {{ $blogs->links() }}
+</div>
     </div>
 </div>
 

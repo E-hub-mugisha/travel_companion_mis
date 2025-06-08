@@ -58,7 +58,7 @@ class HomeController extends Controller
     }
     public function blog()
     {
-        $blogs = Blog::inRandomOrder()->take(6)->get();
+        $blogs = Blog::simplePaginate(6);
         return view('front-page.blog', compact('blogs'));
     }
     public function blogPost($slug)
